@@ -7,6 +7,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0xf2f4ef, 8, 28);
+scene.fog = new THREE.Fog(0x05070c, 7, 30);
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 2.2, 10);
@@ -16,28 +17,28 @@ root.position.set(4.8, 0, -0.9);
 scene.add(root);
 
 const palette = {
-  ink: 0x15211d,
-  teal: 0x21a69a,
-  amber: 0xf2b84b,
-  coral: 0xe35d4f,
-  paper: 0xf2f4ef,
-  leaf: 0x78a65a,
+  ink: 0xdfe7ff,
+  teal: 0x60f5ff,
+  amber: 0xb8a7ff,
+  coral: 0xff6f91,
+  paper: 0x080b12,
+  leaf: 0x8affd2,
 };
 
-const ambient = new THREE.HemisphereLight(0xffffff, 0x6f7d70, 1.8);
+const ambient = new THREE.HemisphereLight(0xdbe7ff, 0x0b1020, 1.4);
 scene.add(ambient);
 
-const key = new THREE.DirectionalLight(0xffffff, 2.2);
+const key = new THREE.DirectionalLight(0xffffff, 2.7);
 key.position.set(4, 7, 6);
 scene.add(key);
 
 const coreGeometry = new THREE.IcosahedronGeometry(1.35, 3);
 const coreMaterial = new THREE.MeshStandardMaterial({
   color: palette.teal,
-  roughness: 0.38,
-  metalness: 0.18,
+  roughness: 0.22,
+  metalness: 0.5,
   emissive: palette.teal,
-  emissiveIntensity: 0.18,
+  emissiveIntensity: 0.42,
 });
 const core = new THREE.Mesh(coreGeometry, coreMaterial);
 core.position.set(2.4, 0.6, -0.3);
@@ -45,10 +46,10 @@ root.add(core);
 
 const ringMaterial = new THREE.MeshStandardMaterial({
   color: palette.amber,
-  roughness: 0.45,
-  metalness: 0.25,
+  roughness: 0.24,
+  metalness: 0.55,
   transparent: true,
-  opacity: 0.72,
+  opacity: 0.58,
 });
 
 for (let i = 0; i < 3; i += 1) {
@@ -121,7 +122,7 @@ for (let i = 0; i < particleCount; i += 1) {
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 const particles = new THREE.Points(
   particleGeometry,
-  new THREE.PointsMaterial({ color: palette.ink, size: 0.018, transparent: true, opacity: 0.32 })
+  new THREE.PointsMaterial({ color: palette.ink, size: 0.02, transparent: true, opacity: 0.45 })
 );
 scene.add(particles);
 

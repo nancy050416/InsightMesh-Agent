@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="InsightMesh AI 企业知识库混合检索 Agent 官网，展示 3D 知识网络、Agent 工作流和产品能力。"
+    />
+    <title>InsightMesh AI</title>
+  </head>
+  <body>
+    <canvas id="scene" aria-label="InsightMesh AI 3D 知识网络"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="InsightMesh AI 首页">
+        <span class="brand-mark">IM</span>
+        <span>InsightMesh AI</span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#product">产品</a>
+        <a href="#workflow">流程</a>
+        <a href="#stack">技术</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Enterprise Knowledge Agent</p>
+          <h1 id="hero-title">InsightMesh AI</h1>
+          <p class="lead">
+            面向企业内部知识库的混合检索 Agent，用 3D 可视化呈现文档节点、语义路径和工具执行过程。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#workflow">查看工作流</a>
+            <a class="secondary-action" href="#stack">技术架构</a>
+          </div>
+        </div>
+        <aside class="signal-panel" aria-label="实时运行指标">
+          <div>
+            <span>Recall</span>
+            <strong>Hybrid</strong>
+          </div>
+          <div>
+            <span>Agent Loop</span>
+            <strong>8 steps</strong>
+          </div>
+          <div>
+            <span>Evidence</span>
+            <strong>Cited</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="content-band" id="product" aria-labelledby="product-title">
+        <div class="section-heading">
+          <p class="eyebrow">Product</p>
+          <h2 id="product-title">把企业资料变成可追溯的行动答案</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>混合召回</h3>
+            <p>结合关键词检索、向量检索和规则过滤，兼顾接口名、制度编号与语义表达。</p>
+          </article>
+          <article>
+            <h3>Agent 决策</h3>
+            <p>先规划，再调用知识库、数据库、文件或邮件工具，复杂任务按步骤完成。</p>
+          </article>
+          <article>
+            <h3>来源引用</h3>
+            <p>答案绑定文档标题、章节路径和片段编号，降低无依据回答风险。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-band muted" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2 id="workflow-title">从问题到答案的执行链路</h2>
+        </div>
+        <ol class="timeline">
+          <li><span>01</span><strong>理解问题</strong><p>识别任务类型、知识库范围和需要调用的工具。</p></li>
+          <li><span>02</span><strong>融合检索</strong><p>关键词召回与向量召回共同进入候选池，再重排为可用证据。</p></li>
+          <li><span>03</span><strong>工具执行</strong><p>按 Agent Loop 多轮调用知识库、数据库、文件和邮件工具。</p></li>
+          <li><span>04</span><strong>生成引用</strong><p>输出结论、依据、步骤和风险提示，并附带来源。</p></li>
+        </ol>
+      </section>
+
+      <section class="content-band" id="stack" aria-labelledby="stack-title">
+        <div class="section-heading">
+          <p class="eyebrow">Stack</p>
+          <h2 id="stack-title">工程化技术栈</h2>
+        </div>
+        <div class="stack-list">
+          <span>Spring AI</span>
+          <span>PostgreSQL</span>
+          <span>pgvector</span>
+          <span>bge-m3</span>
+          <span>SSE</span>
+          <span>React</span>
+          <span>Three.js</span>
+          <span>LoRA</span>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+

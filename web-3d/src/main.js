@@ -4,139 +4,119 @@ import * as THREE from 'three';
 const canvas = document.querySelector('#scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0xf2f4ef, 8, 28);
-scene.fog = new THREE.Fog(0x05070c, 7, 30);
+scene.fog = new THREE.Fog(0x05070c, 8, 28);
 
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.set(0, 2.2, 10);
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.45, 8.6);
 
-const root = new THREE.Group();
-root.position.set(4.8, 0, -0.9);
-scene.add(root);
-
-const palette = {
-  ink: 0xdfe7ff,
-  teal: 0x60f5ff,
-  amber: 0xb8a7ff,
-  coral: 0xff6f91,
-  paper: 0x080b12,
-  leaf: 0x8affd2,
-};
-
-const ambient = new THREE.HemisphereLight(0xdbe7ff, 0x0b1020, 1.4);
+const ambient = new THREE.HemisphereLight(0xffffff, 0x121725, 1.35);
 scene.add(ambient);
 
-const key = new THREE.DirectionalLight(0xffffff, 2.7);
-key.position.set(4, 7, 6);
+const key = new THREE.DirectionalLight(0xffffff, 3.2);
+key.position.set(4, 6, 5);
 scene.add(key);
 
-const coreGeometry = new THREE.IcosahedronGeometry(1.35, 3);
-const coreMaterial = new THREE.MeshStandardMaterial({
-  color: palette.teal,
-  roughness: 0.22,
-  metalness: 0.5,
-  emissive: palette.teal,
-  emissiveIntensity: 0.42,
-});
-const core = new THREE.Mesh(coreGeometry, coreMaterial);
-core.position.set(2.4, 0.6, -0.3);
-root.add(core);
+const rim = new THREE.DirectionalLight(0x86f7ff, 2.2);
+rim.position.set(-5, 2.5, -3);
+scene.add(rim);
 
-const ringMaterial = new THREE.MeshStandardMaterial({
-  color: palette.amber,
+const flask = new THREE.Group();
+flask.rotation.set(-0.16, 0.22, -0.18);
+flask.scale.setScalar(0.9);
+scene.add(flask);
+
+const steel = new THREE.MeshPhysicalMaterial({
+  color: 0xdfe7f4,
+  roughness: 0.18,
+  metalness: 0.82,
+  clearcoat: 0.78,
+  clearcoatRoughness: 0.18,
+});
+
+const darkSteel = new THREE.MeshPhysicalMaterial({
+  color: 0x121722,
   roughness: 0.24,
-  metalness: 0.55,
+  metalness: 0.72,
+  clearcoat: 0.42,
+});
+
+const glow = new THREE.MeshBasicMaterial({
+  color: 0x8ef7ff,
   transparent: true,
-  opacity: 0.58,
+  opacity: 0.18,
 });
 
-for (let i = 0; i < 3; i += 1) {
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.05 + i * 0.52, 0.012, 12, 160), ringMaterial);
-  ring.rotation.set(Math.PI / 2 + i * 0.32, i * 0.44, i * 0.22);
-  ring.userData.spin = 0.0016 + i * 0.0008;
-  core.add(ring);
-}
+const body = new THREE.Mesh(new THREE.CylinderGeometry(0.86, 0.94, 3.9, 96, 1), steel);
+body.position.y = -0.12;
+flask.add(body);
 
-const nodeGeometry = new THREE.SphereGeometry(0.095, 20, 20);
-const docGeometry = new THREE.BoxGeometry(0.48, 0.64, 0.05);
-const nodes = [];
-const connections = [];
+const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.86, 96, 24, 0, Math.PI * 2, 0, Math.PI / 2), steel);
+shoulder.scale.set(1, 0.34, 1);
+shoulder.position.y = 1.83;
+flask.add(shoulder);
 
-function makeMaterial(color, emissive = 0) {
-  return new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.42,
-    metalness: 0.08,
-    emissive: color,
-    emissiveIntensity: emissive,
-  });
-}
+const base = new THREE.Mesh(new THREE.SphereGeometry(0.94, 96, 18, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), steel);
+base.scale.set(1, 0.28, 1);
+base.position.y = -2.07;
+flask.add(base);
 
-const nodeMats = [
-  makeMaterial(palette.teal, 0.2),
-  makeMaterial(palette.amber, 0.08),
-  makeMaterial(palette.coral, 0.08),
-  makeMaterial(palette.leaf, 0.08),
-];
+const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.52, 0.56, 80), steel);
+neck.position.y = 2.22;
+flask.add(neck);
 
-for (let i = 0; i < 34; i += 1) {
-  const angle = (i / 34) * Math.PI * 2;
-  const radius = 3.2 + Math.sin(i * 1.9) * 0.95;
-  const y = Math.cos(i * 0.73) * 1.55;
-  const x = Math.cos(angle) * radius + 1.25;
-  const z = Math.sin(angle) * radius - 1.2;
-  const mesh = new THREE.Mesh(i % 5 === 0 ? docGeometry : nodeGeometry, nodeMats[i % nodeMats.length]);
-  mesh.position.set(x, y, z);
-  mesh.rotation.set(Math.random() * 0.45, Math.random() * 0.7, Math.random() * 0.25);
-  mesh.userData.base = mesh.position.clone();
-  mesh.userData.phase = Math.random() * Math.PI * 2;
-  nodes.push(mesh);
-  root.add(mesh);
-}
+const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.48, 80), darkSteel);
+cap.position.y = 2.66;
+flask.add(cap);
 
-function connect(a, b, color = 0x8ca39a, opacity = 0.36) {
-  const geometry = new THREE.BufferGeometry().setFromPoints([a.position, b.position]);
-  const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
-  const line = new THREE.Line(geometry, material);
-  line.userData.a = a;
-  line.userData.b = b;
-  connections.push(line);
-  root.add(line);
-}
+const capTop = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.5, 0.08, 80), steel);
+capTop.position.y = 2.94;
+flask.add(capTop);
 
-nodes.forEach((node, index) => {
-  connect(node, core, index % 4 === 0 ? palette.amber : 0x8ba49d, index % 4 === 0 ? 0.5 : 0.24);
-  if (index > 0 && index % 2 === 0) connect(node, nodes[index - 1], 0x91a5a0, 0.18);
-});
+const band = new THREE.Mesh(new THREE.TorusGeometry(0.555, 0.035, 14, 96), steel);
+band.position.y = 2.4;
+band.rotation.x = Math.PI / 2;
+flask.add(band);
 
-const particleGeometry = new THREE.BufferGeometry();
-const particleCount = 220;
+const highlight = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 3.1), glow);
+highlight.position.set(-0.42, -0.06, 0.952);
+highlight.rotation.y = -0.12;
+flask.add(highlight);
+
+const floorGlow = new THREE.Mesh(
+  new THREE.RingGeometry(1.4, 2.8, 128),
+  new THREE.MeshBasicMaterial({ color: 0x8ef7ff, transparent: true, opacity: 0.08, side: THREE.DoubleSide })
+);
+floorGlow.rotation.x = -Math.PI / 2;
+floorGlow.position.y = -2.45;
+scene.add(floorGlow);
+
+const particlesGeometry = new THREE.BufferGeometry();
+const particleCount = 90;
 const positions = new Float32Array(particleCount * 3);
 for (let i = 0; i < particleCount; i += 1) {
-  positions[i * 3] = (Math.random() - 0.5) * 15;
-  positions[i * 3 + 1] = (Math.random() - 0.5) * 7;
-  positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+  positions[i * 3] = (Math.random() - 0.5) * 12;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 6;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
 }
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 const particles = new THREE.Points(
-  particleGeometry,
-  new THREE.PointsMaterial({ color: palette.ink, size: 0.02, transparent: true, opacity: 0.45 })
+  particlesGeometry,
+  new THREE.PointsMaterial({ color: 0xdfe7ff, size: 0.014, transparent: true, opacity: 0.32 })
 );
 scene.add(particles);
 
 const pointer = { x: 0, y: 0 };
 window.addEventListener('pointermove', (event) => {
-  pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
-  pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
+  pointer.x = event.clientX / window.innerWidth - 0.5;
+  pointer.y = event.clientY / window.innerHeight - 0.5;
 });
 
 function resize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  renderer.setSize(width, height);
-  camera.aspect = width / height;
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 }
 
@@ -147,31 +127,17 @@ const clock = new THREE.Clock();
 
 function animate() {
   const elapsed = clock.getElapsedTime();
-  root.rotation.y = elapsed * 0.045 + pointer.x * 0.08;
-  root.rotation.x = pointer.y * 0.035;
-  core.rotation.y = elapsed * 0.24;
-  core.rotation.x = Math.sin(elapsed * 0.5) * 0.12;
+  const scroll = Math.min(window.scrollY / Math.max(window.innerHeight, 1), 1.8);
 
-  core.children.forEach((ring) => {
-    ring.rotation.z += ring.userData.spin;
-    ring.rotation.x += ring.userData.spin * 0.4;
-  });
+  flask.rotation.x = -0.16 + pointer.y * 0.22 + scroll * 0.12;
+  flask.rotation.y = 0.22 + pointer.x * 0.7 + scroll * 1.55;
+  flask.rotation.z = -0.18 + Math.sin(elapsed * 0.55) * 0.025;
+  flask.position.y = Math.sin(elapsed * 0.8) * 0.06 - scroll * 0.18;
+  flask.scale.setScalar(0.9 - Math.min(scroll * 0.08, 0.12));
+  canvas.style.opacity = String(Math.max(0.95 - scroll * 0.38, 0.28));
 
-  nodes.forEach((node, index) => {
-    const pulse = Math.sin(elapsed * 1.4 + node.userData.phase) * 0.1;
-    node.position.y = node.userData.base.y + pulse;
-    node.scale.setScalar(1 + Math.max(0, Math.sin(elapsed * 2 + index)) * 0.08);
-  });
-
-  connections.forEach((line) => {
-    const attr = line.geometry.attributes.position;
-    attr.setXYZ(0, line.userData.a.position.x, line.userData.a.position.y, line.userData.a.position.z);
-    attr.setXYZ(1, line.userData.b.position.x, line.userData.b.position.y, line.userData.b.position.z);
-    attr.needsUpdate = true;
-  });
-
-  particles.rotation.y = elapsed * 0.018;
-  camera.lookAt(5.4, 0.25, -1);
+  floorGlow.scale.setScalar(1 + Math.sin(elapsed * 0.7) * 0.04);
+  particles.rotation.y = elapsed * 0.015;
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }

@@ -2,7 +2,7 @@
 
 ## 1. 作品定位
 
-官网命名为 InsightMesh AI，用于展示企业知识库混合检索 Agent。页面不是普通静态落地页，而是将产品核心能力直接做成 3D 场景：文档节点、语义连接、Agent 决策核心和检索轨道共同构成可视化首页。
+官网命名为 InsightMesh AI，用于展示一家虚拟的智能检索科技公司。页面不是普通静态落地页，而是将公司主营业务“企业知识库混合检索 Agent”直接做成 3D 场景：文档节点、语义连接、Agent 决策核心和检索轨道共同构成可视化首页。
 
 ## 2. 技术选型
 
@@ -15,9 +15,12 @@
 | 区块 | 内容 |
 | --- | --- |
 | Hero | 公司名、产品定位、3D 知识网络、实时指标 |
-| Product | 混合召回、Agent 决策、来源引用 |
+| Company | 公司简介、服务对象、部署方式 |
+| Solutions | 知识库检索中心、业务 Agent 助手、私有化 AI 中台 |
 | Workflow | 理解问题、融合检索、工具执行、生成引用 |
+| Cases | 研发团队、客服中心、人力行政典型客户场景 |
 | Stack | Spring AI、PostgreSQL、pgvector、bge-m3、SSE、React、Three.js、LoRA |
+| Contact | 公司联系入口 |
 
 ## 4. 3D 场景设计
 
@@ -51,4 +54,3 @@
 - Product 区块对应 Agent 设计说明中的核心能力。
 - Workflow 区块对应 Think-Execute Loop 和 RAG 执行链路。
 - Stack 区块对应后端、前端、检索和微调技术栈。
-

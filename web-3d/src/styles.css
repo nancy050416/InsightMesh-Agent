@@ -223,6 +223,54 @@ h2 {
   margin: 0 auto;
 }
 
+.company-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(260px, 0.38fr);
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.company-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 760px;
+  color: #40534c;
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.company-copy p {
+  margin: 0;
+}
+
+.company-stats {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.company-stats div {
+  min-height: 78px;
+  padding: 16px;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.company-stats dt {
+  color: #66756f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.company-stats dd {
+  margin: 8px 0 0;
+  color: #15211d;
+  font-size: 20px;
+  font-weight: 900;
+}
+
 .feature-grid article {
   min-height: 210px;
   padding: 22px;
@@ -294,6 +342,74 @@ h3 {
   font-weight: 800;
 }
 
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.case-grid article {
+  min-height: 210px;
+  padding: 22px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+}
+
+.case-grid span {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #bd463b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.case-grid p {
+  margin: 0;
+  color: #4e5e59;
+  line-height: 1.75;
+}
+
+.contact-band {
+  padding-bottom: 72px;
+}
+
+.contact-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.contact-layout p {
+  max-width: 680px;
+  margin: 0;
+  color: #40534c;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px clamp(20px, 5vw, 72px);
+  background: #15211d;
+  color: #f2f4ef;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 @media (max-width: 820px) {
   #scene {
     opacity: 0.32;
@@ -321,13 +437,22 @@ h3 {
 
   .section-heading,
   .feature-grid,
-  .timeline {
+  .timeline,
+  .company-layout,
+  .case-grid {
     grid-template-columns: 1fr;
   }
 
   .feature-grid article,
-  .timeline li {
+  .timeline li,
+  .case-grid article {
     min-height: auto;
+  }
+
+  .contact-layout,
+  footer {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 

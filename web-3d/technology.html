@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>技术 | InsightMesh AI</title>
+  </head>
+  <body class="inner-page">
+    <header class="topbar solid">
+      <a class="brand" href="/InsightMesh-Agent/"><span class="brand-mark">IM</span><span>InsightMesh AI</span></a>
+      <nav><a href="/InsightMesh-Agent/about.html">公司</a><a href="/InsightMesh-Agent/solutions.html">方案</a><a href="/InsightMesh-Agent/cases.html">案例</a><a class="active" href="/InsightMesh-Agent/technology.html">技术</a><a href="/InsightMesh-Agent/contact.html">联系</a></nav>
+    </header>
+    <main>
+      <section class="page-hero">
+        <p class="eyebrow">Technology</p>
+        <h1>可信 RAG 与 Agent Loop 的工程化组合</h1>
+        <p>技术页面对应作品中的真实工程：Spring AI 后端、pgvector 检索、SSE 状态推送、React 管理界面和 LoRA 微调方案。</p>
+      </section>
+      <section class="content-band">
+        <div class="tech-matrix">
+          <div><h3>检索层</h3><p>Markdown 解析、结构化切分、bge-m3 embedding、PostgreSQL + pgvector、关键词召回与 rerank 设计。</p></div>
+          <div><h3>Agent 层</h3><p>Think-Execute Loop、状态机、最大步数控制、工具注册、工具失败处理和执行过程记录。</p></div>
+          <div><h3>模型层</h3><p>DeepSeek / 智谱 ChatClient 注册表，支持未来接入私有模型和 LoRA adapter。</p></div>
+          <div><h3>体验层</h3><p>React 管理端、知识库管理、会话管理、SSE 状态流和 Three.js 公司官网。</p></div>
+        </div>
+      </section>
+      <section class="content-band muted">
+        <div class="section-heading">
+          <p class="eyebrow">Stack</p>
+          <h2>技术栈</h2>
+        </div>
+        <div class="stack-list"><span>Spring Boot</span><span>Spring AI</span><span>PostgreSQL</span><span>pgvector</span><span>bge-m3</span><span>SSE</span><span>React</span><span>Three.js</span><span>LoRA</span></div>
+      </section>
+    </main>
+    <footer><span>InsightMesh AI 智能检索科技公司</span><span>Engineering for Evidence</span></footer>
+    <script type="module" src="/src/site.js"></script>
+  </body>
+</html>
+

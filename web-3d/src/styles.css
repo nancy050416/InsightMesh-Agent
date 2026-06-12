@@ -12,7 +12,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -77,6 +77,16 @@ nav {
   gap: clamp(14px, 3vw, 30px);
   font-size: 14px;
   font-weight: 700;
+}
+
+nav a {
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+
+nav a.active {
+  border-color: #bd463b;
+  color: #bd463b;
 }
 
 main {
@@ -194,6 +204,44 @@ h1 {
   border-top: 1px solid rgba(21, 33, 29, 0.1);
 }
 
+.home-hero {
+  border-bottom: 1px solid rgba(21, 33, 29, 0.1);
+}
+
+.inner-page {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(33, 166, 154, 0.11), transparent 30%),
+    radial-gradient(circle at 10% 25%, rgba(242, 184, 75, 0.14), transparent 28%),
+    #f2f4ef;
+}
+
+.topbar.solid {
+  background: rgba(250, 251, 247, 0.92);
+}
+
+.page-hero {
+  position: relative;
+  z-index: 1;
+  min-height: 62vh;
+  display: grid;
+  align-content: end;
+  padding: 132px clamp(20px, 5vw, 72px) 72px;
+  border-bottom: 1px solid rgba(21, 33, 29, 0.1);
+}
+
+.page-hero h1 {
+  max-width: 920px;
+  font-size: clamp(42px, 7vw, 86px);
+}
+
+.page-hero p:last-child {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: #40534c;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.75;
+}
+
 .content-band.muted {
   background: rgba(230, 236, 226, 0.92);
 }
@@ -205,6 +253,26 @@ h1 {
   align-items: start;
   max-width: 1180px;
   margin: 0 auto 36px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.36fr) minmax(0, 0.64fr);
+  gap: 40px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.rich-copy {
+  display: grid;
+  gap: 16px;
+  color: #40534c;
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.rich-copy p {
+  margin: 0;
 }
 
 h2 {
@@ -342,6 +410,77 @@ h3 {
   font-weight: 800;
 }
 
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.proof-grid div {
+  min-height: 132px;
+  padding: 22px;
+  border-radius: 8px;
+  background: #15211d;
+  color: #f2f4ef;
+}
+
+.proof-grid strong {
+  display: block;
+  margin-bottom: 16px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1;
+}
+
+.proof-grid span {
+  color: rgba(242, 244, 239, 0.76);
+  line-height: 1.6;
+}
+
+.solution-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.solution-stack article {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 0.38fr) minmax(0, 0.42fr) minmax(180px, 0.2fr);
+  gap: 22px;
+  align-items: start;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 26px;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.solution-stack article > span {
+  color: #bd463b;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.solution-stack h2 {
+  font-size: clamp(24px, 3vw, 36px);
+}
+
+.solution-stack p {
+  margin: 0;
+  color: #40534c;
+  line-height: 1.75;
+}
+
+.solution-stack ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: #263831;
+  font-weight: 800;
+}
+
 .case-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -369,6 +508,77 @@ h3 {
 .case-grid p {
   margin: 0;
   color: #4e5e59;
+  line-height: 1.75;
+}
+
+.case-grid.detailed {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-grid.detailed article {
+  min-height: 260px;
+}
+
+.case-grid.detailed strong {
+  display: block;
+  margin-top: 18px;
+  color: #15211d;
+}
+
+.tech-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.tech-matrix div {
+  min-height: 220px;
+  padding: 24px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+}
+
+.tech-matrix p {
+  margin: 0;
+  color: #40534c;
+  line-height: 1.75;
+}
+
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  min-height: 230px;
+  padding: 24px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(21, 33, 29, 0.12);
+}
+
+.contact-card span {
+  color: #bd463b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.contact-card strong {
+  display: block;
+  margin: 18px 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.contact-card p {
+  margin: 0;
+  color: #40534c;
   line-height: 1.75;
 }
 
@@ -439,7 +649,16 @@ footer {
   .feature-grid,
   .timeline,
   .company-layout,
-  .case-grid {
+  .case-grid,
+  .case-grid.detailed,
+  .proof-grid,
+  .tech-matrix,
+  .contact-page-grid,
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .solution-stack article {
     grid-template-columns: 1fr;
   }
 
